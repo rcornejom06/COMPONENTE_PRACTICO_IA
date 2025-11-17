@@ -6,7 +6,7 @@ import os
 
 # configurar la página
 st.set_page_config(
-    page_title="Clasificador de Residos Organicos e Inorgánicos",
+    page_title="Clasificador de Residos Orgánicos e Inorgánicos",
     layout="wide",
     page_icon="♻️",
     initial_sidebar_state="expanded"
@@ -61,10 +61,10 @@ def predict_waste(model, image):
     probability = float(prediction[0][0])
 
     if probability >= 0.5:
-        class_name = "Orgánico"
+        class_name = "Inorgánico"
         confidence = probability
     else:
-        class_name = "Inorgánico"
+        class_name = "Orgánico"
         confidence = 1 - probability
 
     return class_name, confidence, probability
@@ -85,10 +85,10 @@ modelo_info = {
         'description': 'Modelo basado en AlexNet, equilibrando precisión y velocidad para aplicaciones generales.',
         'accuracy': '92%'
     },
-    'DenseNet121 (Preciso)': {
-        'path': 'models/densenet121_residuos.h5',
-        'description': 'Modelo basado en DenseNet121, diseñado para máxima precisión en clasificación de residuos.',
-        'accuracy': '95%'
+    'HRNet (Alta Resolución)': {
+        'path': 'models/hrnet_residuos.h5',
+        'description': 'Modelo basado en HRNet, mantiene alta resolución para máxima precisión en detalles espaciales.',
+        'accuracy': '93%'
     }
 }
 
@@ -164,7 +164,7 @@ with col_result:
         </div>
         """, unsafe_allow_html=True)
 
-st.success(f"Clasificación completada con {modelo_seleccionado}")
+        st.success(f"Clasificación completada con {modelo_seleccionado}")
 
 # footer
 st.markdown("---")
